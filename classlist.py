@@ -2,6 +2,11 @@ import os
 # creating .tex file from with python
 import sys
 
+def input_student(student_id, student_name, student_date_of_birth, student_training_program):
+    """Input student data"""
+    print(student_id, student_name, student_date_of_birth, student_training_program)
+    filename = "classlist.dat"
+
 def create_student_data_texfile(student_data):
     """Create student data texfile (student_data.tex)"""
     print(student_data)
@@ -40,7 +45,13 @@ def import_student_data(filename):
 # chuong trinh chinh bat dau tu day
 def main():
     """This is the main program"""
-    script, semester, academic_year = sys.argv
+#    script, semester, academic_year = sys.argv
+    if sys.argv[1] == "-i":
+        student_id, student_name, student_date_of_birth, student_training_program = sys.argv[2:]
+        input_student(student_id, student_name, student_date_of_birth, student_training_program)
+        sys.exit(0)
+    semester = "hoc ki 1"
+    academic_year = "2020-2021"
     textfilename = "newclasslist.tex"
     fout = open(textfilename,"w")
     content = r"""\documentclass[12pt,a4paper]{book}
@@ -95,7 +106,7 @@ Thứ: 4\tab[9.1cm]Tiết: 9 - 11\tab[3.45cm]Giảng đường: 201T5\\
     else:
         print(f'Viewing {pdffilename} successfully!!!')
     print(sys.argv)
-    print("Chuong trinh la %s abcd %s cdf %s"%(script, semester, academic_year))
+#    print("Chuong trinh la %s abcd %s cdf %s"%(script, semester, academic_year))
 
     filename = 'classlist.dat'
     student_data = import_student_data(filename)
